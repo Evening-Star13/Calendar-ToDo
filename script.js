@@ -30,7 +30,6 @@ const months = [
 /*=============== Function to Add Days   ===============*/
 
 function initCalendar() {
-  // To Get prev month days and current month all days and rem next month days
   const firstDay = new Date(year, month, 1);
   const lastDay = new Date(year, month + 1, 0);
   const prevLastDay = new Date(year, month, 0);
@@ -39,10 +38,7 @@ function initCalendar() {
   const day = firstDay.getDay();
   const nextDays = 7 - lastDay.getDay() - 1;
 
-  // Update date top of Calendar
   date.innerHTML = months[month] + " " + year;
-
-  // Adding days on DOM
 
   let days = "";
 
@@ -53,31 +49,26 @@ function initCalendar() {
 
   // Current month days
   for (let i = 1; i <= lastDate; i++) {
-    // Changed < to <=
-    // If day is today add class today
     if (
       i === new Date().getDate() &&
       year === new Date().getFullYear() &&
       month === new Date().getMonth()
     ) {
-      days += `<div class="day today">${i}</div>`; // Corrected template literal
+      days += `<div class="day today">${i}</div>`;
     } else {
-      // Add remaining Days
-      days += `<div class="day">${i}</div>`; // Corrected template literal
+      days += `<div class="day">${i}</div>`;
     }
   }
 
   // Next Month Days
   for (let j = 1; j <= nextDays; j++) {
-    days += `<div class="day next-date">${j}</div>`; // Corrected template literal
+    days += `<div class="day next-date">${j}</div>`;
   }
 
   daysContainer.innerHTML = days;
 }
 
 initCalendar();
-
-// Prev Month
 
 function prevMonth() {
   month--;
@@ -88,8 +79,6 @@ function prevMonth() {
   initCalendar();
 }
 
-// Next Month
-
 function nextMonth() {
   month++;
   if (month > 11) {
@@ -99,12 +88,8 @@ function nextMonth() {
   initCalendar();
 }
 
-// Add Event Listener to prev and next buttons
-
 prev.addEventListener("click", prevMonth);
 next.addEventListener("click", nextMonth);
-
-//Goto Date Functionality
 
 todayBtn.addEventListener("click", () => {
   today = new Date();
@@ -113,7 +98,39 @@ todayBtn.addEventListener("click", () => {
   initCalendar();
 });
 
-dateInput.addEventListener("keyup", (e) => {
-  // Allow only numbers remove anything else
+dateInput.addEventListener("input", (e) => {
+  // Allow only numbers and slashes
   dateInput.value = dateInput.value.replace(/[^0-9/]/g, "");
+
+  // Automatically add a slash after the month
+  if (dateInput.value.length === 2 && !dateInput.value.includes("/")) {
+    dateInput.value += "/";
+  }
+
+  // Limit the input to a maximum of 7 characters (MM/YYYY)
+  if (dateInput.value.length > 7) {
+    dateInput.value = dateInput.value.slice(0, 7);
+  }
+
+  // Handle backspace to remove the slash if needed
+  if (e.inputType === "deleteContentBackward") {
+    if (dateInput.value.length === 3) {
+      dateInput.value = dateInput.value.slice(0, 2);
+    }
+  }
 });
+
+gotoBtn.addEventListener("click", gotoDate);
+
+function gotoDate() {
+  const dateArr = dateInput.value.split("/");
+  if (dateArr.length === 2) {
+    if (dateArr[0] > 0 && dateArr[0] < 13 && dateArr[1].length === 4) {
+      month = dateArr[0] - 1; // Fixed assignment operator
+      year = dateArr[1];
+      initCalendar();
+      return;
+    }
+  }
+  alert("Invalid Date");
+}
