@@ -3,6 +3,9 @@ const calendar = document.querySelector(".calendar"),
   daysContainer = document.querySelector(".days"),
   prev = document.querySelector(".prev"),
   next = document.querySelector(".next");
+todayBtn = document.querySelector(".today-btn");
+gotoBtn = document.querySelector(".goto-btn");
+dateInput = document.querySelector(".date-input");
 
 let today = new Date();
 let activeDay;
@@ -100,3 +103,17 @@ function nextMonth() {
 
 prev.addEventListener("click", prevMonth);
 next.addEventListener("click", nextMonth);
+
+//Goto Date Functionality
+
+todayBtn.addEventListener("click", () => {
+  today = new Date();
+  month = today.getMonth();
+  year = today.getFullYear();
+  initCalendar();
+});
+
+dateInput.addEventListener("keyup", (e) => {
+  // Allow only numbers remove anything else
+  dateInput.value = dateInput.value.replace(/[^0-9/]/g, "");
+});
