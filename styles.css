@@ -440,3 +440,54 @@ body {
 .add-event-body .add-event-input input:focus::placeholder {
   color: var(--primary-clr);
 }
+
+.add-event-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.add-event-btn {
+  height: 40px;
+  font-size: 1rem;
+  font-weight: 500;
+  outline: none;
+  color: var(--secondary-clr);
+  background-color: var(--primary-clr);
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border: 1px solid var(--primary-clr);
+}
+
+.add-event-btn:hover {
+  color: var(--primary-clr);
+  background-color: transparent;
+}
+
+.add-event {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: #878895;
+  border: 2px solid #878895;
+  opacity: 0.5;
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.add-event:hover {
+  opacity: 1;
+}
+
+.add-event i {
+  pointer-events: none;
+}

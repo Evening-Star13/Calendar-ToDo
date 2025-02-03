@@ -134,3 +134,14 @@ function gotoDate() {
   }
   alert("Invalid Date");
 }
+
+const addEventBtn = document.querySelector(".add-event"),
+  addEventContainer = document.querySelector(".add-event-wrapper"),
+  addEventCloseBtn = document.querySelector("close");
+
+addEventBtn.addEventListener("click", () => {
+  addEventContainer.classList.toggle("active");
+});
+addEventCLoseBtn.addEventListener("click", () => {
+  addEventContainer.classList.toggle("active");
+});
