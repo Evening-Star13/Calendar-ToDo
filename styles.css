@@ -1,5 +1,6 @@
 :root {
   --primary-clr: #b38add;
+  --secondary-clr: #fff;
 }
 
 * {
@@ -23,7 +24,7 @@ body {
   min-height: 850px;
   margin: 0 auto;
   padding: 5px;
-  color: #fff;
+  color: var(--secondary-clr);
   display: flex;
   border-radius: 10px;
   background-color: #32374b;
@@ -44,7 +45,7 @@ body {
   justify-content: space-between;
   color: #878895;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: var(--secondary-clr);
 }
 
 .calendar::before,
@@ -131,7 +132,7 @@ body {
 }
 
 .calendar .day:not(.prev-date, .next-date):hover {
-  color: #fff;
+  color: var(--secondary-clr);
   background-color: var(--primary-clr);
 }
 
@@ -143,7 +144,7 @@ body {
 .calendar .days .active {
   position: relative;
   font-size: 2rem;
-  color: #fff;
+  color: var(--secondary-clr);
   background-color: var(--primary-clr);
 }
 
@@ -178,11 +179,11 @@ body {
 }
 
 .calendar .event:hover::after {
-  background-color: #fff;
+  background-color: var(--secondary-clr);
 }
 
 .calendar .active.event::after {
-  background-color: #fff;
+  background-color: var(--secondary-clr);
   bottom: 20%;
 }
 
@@ -230,7 +231,7 @@ body {
 }
 
 .calendar .goto-today button:hover {
-  color: #fff;
+  color: var(--secondary-clr);
   background-color: var(--primary-clr);
 }
 
@@ -295,7 +296,7 @@ body {
   gap: 5px;
   padding: 0 20px;
   padding-left: 50px;
-  color: #fff;
+  color: var(--secondary-clr);
   cursor: pointer;
   background: linear-gradient(90deg, #3f4458, transparent);
 }
@@ -323,4 +324,35 @@ body {
 .events .event .title i {
   color: var(--primary-clr);
   font-size: 0.5rem;
+}
+
+.events .event:hover .title i,
+.events .event:hover .event-time {
+  color: var(--secondary-clr);
+}
+
+.events .event .title .event-time {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #878895;
+  margin-left: 15px;
+  pointer-events: none;
+}
+
+.event::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  font-size: 3rem;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.3;
+  color: var(--primary-clr);
+  transform: translateY(-50%);
+}
+
+.event:hover::after {
+  display: flex;
 }
