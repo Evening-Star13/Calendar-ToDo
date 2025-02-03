@@ -8,7 +8,8 @@ const calendar = document.querySelector(".calendar"),
   dateInput = document.querySelector(".date-input"),
   eventDay = document.querySelector(".event-day"),
   eventDate = document.querySelector(".event-date"),
-  eventsContainer = document.querySelector(".events");
+  eventsContainer = document.querySelector(".events"),
+  addEventSubmit = document.querySelector(".add-event-btn");
 
 let today = new Date();
 let activeDay;
@@ -364,3 +365,16 @@ function updateEvents(date) {
   console.log(events);
   eventsContainer.innerHTML = events;
 }
+
+// Lets Create Function to Add Events
+addEventSubmit.addEventListener("click", () => {
+  const eventTitle = addEventTitle.value;
+  const eventTimeFrom = addEventFrom.value;
+  const eventTimeTo = addEventTo.value;
+
+  // Some Validation
+
+  if (eventTitle === "" || eventTimeFrom === "" || eventTimeTo === "") {
+    alert("Please Fill All Fields");
+  }
+});
