@@ -31,35 +31,11 @@ const months = [
   "December",
 ];
 
-// Default Events Array
-const eventsArr = [
-  {
-    day: 3,
-    month: 2,
-    year: 2025,
-    events: [
-      {
-        title: "Event 1 Relax today",
-        time: "10:00 AM",
-      },
-      {
-        title: "Event 2 Do Dishes",
-        time: "11:00 AM",
-      },
-    ],
-  },
-  {
-    day: 12,
-    month: 2,
-    year: 2025,
-    events: [
-      {
-        title: "Event 1 Take a Bath",
-        time: "10:00 AM",
-      },
-    ],
-  },
-];
+// Set an Empty Array
+let eventsArr = [];
+
+// Then Call Get
+getEvents(eventsArr);
 
 /*=============== Function to Add Days   ===============*/
 
@@ -355,8 +331,9 @@ function updateEvents(date) {
         </div>`;
   }
 
-  console.log(events);
   eventsContainer.innerHTML = events;
+  // Save Events WheUpdate Called
+  saveEvents();
 }
 
 // Lets Create Function to Add Events
@@ -464,7 +441,36 @@ eventsContainer.addEventListener("click", (e) => {
             event.events.splice(index, 1);
           }
         });
+
+        // If no Event Remaining on That Day Remove Complete Day
+
+        if (event.events.length === 0) {
+          eventsArr.splice(eventsArr.indexOf(event), 1);
+          // After Remove Complete Day Also Remove Class from Day Element
+
+          const activeDayElem = document.querySelector(".day.active");
+          if (activeDayElem.classList.contains("event")) {
+            activeDayElem.classList.remove("event");
+          }
+        }
       }
     });
+    // After Removing Form Array Update Event
+    updateEvents(activeDay);
   }
 });
+
+// Store Events in Local Storage Get From There
+
+function saveEvents() {
+  localStorage.setItem("events", JSON.stringify(eventsArr));
+}
+
+//function to get events from local storage
+function getEvents() {
+  //check if events are already saved in local storage then return event else nothing
+  if (localStorage.getItem("events") === null) {
+    return;
+  }
+  eventsArr.push(...JSON.parse(localStorage.getItem("events")));
+}
